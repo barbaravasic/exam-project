@@ -17,7 +17,7 @@ class Exam {
     }
 
     getExamInfo() {
-        return `${this.subject}, ${this.student.getStudentData()}, ${this.grade}`;
+        return `${this.subject}, ${this.student.getStudentData()}`;
     }
 
     hasPassed() {
@@ -47,9 +47,23 @@ export const createExam = (student, subject, grade) => {
     return createdExam;
 }
 
-export const calculateFailedPercentage = () => {
-    const totalNumOfExams = store.passedList.length + store.failedList.length;
-    const numOfFailed = store.failedList.length;
+export const removeFromPassed = (index) => {
+    return store.passedList.filter((element, i) => {
+        return i!== index;
+    })
+}
+
+export const removeFromFailed = (index) => {
+    return store.failedList.filter((element, i) => {
+        console.log(i, index);
+        
+        return i!== index;
+    })
+}
+
+export const calculateFailedPercentage = (passedList, failedList) => {
+    const totalNumOfExams = passedList + failedList;
+    const numOfFailed = failedList;
 
     return parseInt(100*numOfFailed/totalNumOfExams);
 }

@@ -27,16 +27,11 @@
         font-size: 18px;
         border-bottom: 1px solid #e7e7e7;
         padding: 15px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
     }
-    .span-li{
-        float: left;
-    }
-    .span-container {
-        float: right;
-    }
-    .grade-span {
-        float: left;
-    }
+  
     .btn-x {
         font-size: 18px;
         background: none;
@@ -45,10 +40,6 @@
         line-height: 1;
     }
     
-    .btn-x:focus {
-         outline: none; 
-    }
-
     li:first-child { 
         border-top: 1px solid #e7e7e7;
      }
