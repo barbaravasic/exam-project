@@ -54,4 +54,12 @@ export const calculateFailedPercentage = () => {
     return parseInt(100*numOfFailed/totalNumOfExams);
 }
 
+export const generateCurrentMonth = () => {
+    var currentDate = new Date;
+    var monthArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+    var currentMonth = monthArray[currentDate.getMonth()];
+    return currentMonth;
+}
+
 

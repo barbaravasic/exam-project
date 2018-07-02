@@ -7,7 +7,9 @@ export const DOMSelectors = {
     ulFailed: "#failed-student-list",
     passedCount: "#passed-count",
     failedCount: "#failed-count",
-    failedPercent: "#failed-percent"
+    failedPercent: "#failed-percent",
+    statisticDate:"#statistic-date",
+    studentsCount:"#students-count"
 }
 
 export const collectInputs = () => {
@@ -23,6 +25,14 @@ export const collectInputs = () => {
         surname,
         grade
     }
+}
+
+export const displayCurrentMonth = (month) => {  
+    $(DOMSelectors.statisticDate).text(month());
+}
+
+export const displayStudentsCount = (numOfStudents) => {
+    $(DOMSelectors.studentsCount).text(numOfStudents)
 }
 
 export const displayPassed = (passedExamList) => {

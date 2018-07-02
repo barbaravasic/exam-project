@@ -11,10 +11,12 @@ const addExamHandler = () => {
        ui.displayFailed(data.store.failedList)
    }
    ui.displayPassedFailedCount(data.store.passedList.length, data.store.failedList.length, data.calculateFailedPercentage)
-
+   ui.displayStudentsCount(data.store.studentList.length)
+   
 }
 
 export const init = () => {
+    ui.displayCurrentMonth(data.generateCurrentMonth);
     const $addBtn = $(ui.DOMSelectors.btnAdd);
     $addBtn.on("click", addExamHandler);
 }
