@@ -9,29 +9,50 @@ class Student {
 
 }
 
-class Subject {
-    constructor(name) {
-        this.name = name;
-    }
-    getSubjectName() {
-        return this.name;
-    }
-
-}
-
 class Exam {
-    constructor(subject, student, grade) {
-        this.subject = subject;
+    constructor(student,subject, grade) {
         this.student = student;
+        this.subject = subject;
         this.grade = grade;
     }
 
     getExamInfo() {
-        return `${this.subject.name}, ${this.student.getStudentData()}, ${this.grade}`;
+        return `${this.subject}, ${this.student.getStudentData()}, ${this.grade}`;
     }
 
     hasPassed() {
         return this.grade > 5;
     }
 }
+
+export const store = {    
+    studentList:[],
+    passedList: [],
+    failedList: []
+}
+
+export const createStudent = (name, surname) => {
+    const createdStudent = new Student(name, surname);
+    store.studentList.push(createdStudent);
+    return createdStudent;
+}
+
+export const createExam = (student, subject, grade) => {
+    const createdExam = new Exam(student, subject, grade);
+    if(createdExam.grade > 5){
+        store.passedList.push(createdExam);
+    } else {
+        store.failedList.push(createdExam)
+    }
+    return createdExam;
+}
+
+export const getPassedCount = () => {
+    return store.passedList.length;
+} 
+
+export const getFailedCount = () => {
+    return store.failedList.length;
+} 
+
 
