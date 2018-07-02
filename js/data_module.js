@@ -47,12 +47,11 @@ export const createExam = (student, subject, grade) => {
     return createdExam;
 }
 
-export const getPassedCount = () => {
-    return store.passedList.length;
-} 
+export const calculateFailedPercentage = () => {
+    const totalNumOfExams = store.passedList.length + store.failedList.length;
+    const numOfFailed = store.failedList.length;
 
-export const getFailedCount = () => {
-    return store.failedList.length;
-} 
+    return parseInt(100*numOfFailed/totalNumOfExams);
+}
 
 

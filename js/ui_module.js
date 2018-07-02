@@ -4,7 +4,10 @@ export const DOMSelectors = {
     nameInput: ".name-input",
     gradeInput: ".grade-input",
     ulPassed: "#passed-student-list",
-    ulFailed: "#failed-student-list"
+    ulFailed: "#failed-student-list",
+    passedCount: "#passed-count",
+    failedCount: "#failed-count",
+    failedPercent: "#failed-percent"
 }
 
 export const collectInputs = () => {
@@ -40,4 +43,10 @@ export const displayFailed = (failedExamList) => {
     });
     $ulFailed.append($failedListItems);
     $prevUl.replaceWith($ulFailed)
+}
+
+export const displayPassedFailedCount = (numOfPassed, numOfFailed, percentOfFailed) => {
+    const $passedCount = $(DOMSelectors.passedCount).text(numOfPassed);
+    const $failedCount = $(DOMSelectors.failedCount).text(numOfFailed);
+    const $failedPercent = $(DOMSelectors.failedPercent).text(`${percentOfFailed()}%`)
 }

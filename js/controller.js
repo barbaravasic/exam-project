@@ -10,6 +10,7 @@ const addExamHandler = () => {
    } else {
        ui.displayFailed(data.store.failedList)
    }
+   ui.displayPassedFailedCount(data.store.passedList.length, data.store.failedList.length, data.calculateFailedPercentage)
 
 }
 
