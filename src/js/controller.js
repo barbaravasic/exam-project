@@ -18,12 +18,18 @@ const addExamHandler = () => {
 
 const removeItemHandler = (event) => {
     event.preventDefault();
-    const chosenItemId = event.target.parentElement.parentElement.id
+    const chosenItemId = event.target.parentElement.parentElement.id;
+    const content = event.target.parentElement.parentElement.textContent;
     if (event.target.className === "btn-x") {
         $(`#${chosenItemId}`).remove();
         const index = parseFloat(chosenItemId)
-        console.log(data.removeFromPassed(index).length);
-        ui.displayPassedFailedCount(data.removeFromPassed(index).length, data.removeFromFailed(index).length, data.calculateFailedPercentage)
+        console.log(content);
+        if(chosenItemId.includes('passed')) {
+            data.removeFromPassed(content);
+        } else {
+            data.removeFromFailed(content);
+        }
+    ui.displayPassedFailedCount(data.store.passedList.length, data.store.failedList.length, data.calculateFailedPercentage)        
     }
     
 }
