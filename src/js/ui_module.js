@@ -9,7 +9,9 @@ export const DOMSelectors = {
     failedCount: "#failed-count",
     failedPercent: "#failed-percent",
     statisticDate:"#statistic-date",
-    studentsCount:"#students-count"
+    studentsCount:"#students-count",
+    nameValidation: ".nameValidation",
+    gradeValidation: ".gradeValidation"
 }
 
 export const collectInputs = () => {
@@ -76,4 +78,23 @@ export const displayPassedFailedCount = (numOfPassed, numOfFailed, percentOfFail
     const $failedCount = $(DOMSelectors.failedCount).replaceWith($failedCountNew);
     const $failedPercentNew = $("<p id='failed-percent'>").text(`${percentOfFailed(numOfPassed, numOfFailed)}%`);
     const $failedPercent = $(DOMSelectors.failedPercent).replaceWith($failedPercentNew);
+}
+
+export const displayNameInputError = () => {
+    const $nameValidationMessage = $(DOMSelectors.nameValidation);
+    $nameValidationMessage.text("You must insert both name and surname!");
+}
+
+export const displayGradeError = () => {
+    const $gradeValidationMessage = $(DOMSelectors.gradeValidation);
+    $gradeValidationMessage.text("Grade can only be from 5 to 10!");
+}
+
+export const removeNameValidation = () => {
+    const $nameValidationMessage = $(DOMSelectors.nameValidation);
+    $nameValidationMessage.text("");
+}
+export const removeGradeValidation = () => {
+    const $gradeValidationMessage = $(DOMSelectors.gradeValidation);
+    $gradeValidationMessage.text("");
 }

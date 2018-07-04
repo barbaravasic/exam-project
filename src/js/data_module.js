@@ -19,10 +19,6 @@ class Exam {
     getExamInfo() {
         return `${this.subject}, ${this.student.getStudentData()}`;
     }
-
-    hasPassed() {
-        return this.grade > 5;
-    }
 }
 
 export const store = {
@@ -36,7 +32,9 @@ export const createStudent = (name, surname) => {
     if (student) {
         return student;
     } else {
-        const createdStudent = new Student(name, surname);
+        const studentName = `${name[0].toUpperCase()}${name.slice(1)}`
+        const studentSurname = `${surname[0].toUpperCase()}${surname.slice(1)}`
+        const createdStudent = new Student(studentName, studentSurname);
         store.studentList.push(createdStudent);
         return createdStudent
     }
@@ -73,11 +71,7 @@ export const removeFromFailed = (content) => {
 export const removeFromStudentList = (content, allExams) => {
     const name = content.split(" ")[1];
     const surname = content.split(" ")[2];
-    console.log(store.studentList);
-    // const element = store.studentList.filter(el => {
-    //     return el.name === name && el.surname === surname;
-    // })[0]
-    
+
     const studentRepetition = allExams.filter(el => {
         return el.student.name === name && el.student.surname === surname
     })
@@ -88,16 +82,18 @@ export const removeFromStudentList = (content, allExams) => {
     } else {
         store.studentList.splice(index, 1);
     }
-
-    console.log(studentRepetition);
-
 }
 
 export const calculateFailedPercentage = (passedList, failedList) => {
     const totalNumOfExams = passedList + failedList;
     const numOfFailed = failedList;
-
-    return parseInt(100 * numOfFailed / totalNumOfExams);
+    console.log(totalNumOfExams);
+    
+    if(totalNumOfExams !== 0){
+        return parseInt(100 * numOfFailed / totalNumOfExams);
+    } else {
+        return 0
+    }
 }
 
 export const generateCurrentMonth = () => {
@@ -108,4 +104,19 @@ export const generateCurrentMonth = () => {
     return currentMonth;
 }
 
+export const isValidName = (name, surname) => {
+    if(name && surname) {
+        return true
+    } else {
+        return false
+    }
+}
+
+export const isValidGrade = (grade) => {
+    if(grade && grade >= 5 && grade <= 10) {
+        return true
+    } else {
+        return false
+    }
+}
 

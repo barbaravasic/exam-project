@@ -3,16 +3,27 @@ import * as data from './data_module.js';
 
 const addExamHandler = () => {
     const collectedInputs = ui.collectInputs();
-    const createdStudent = data.createStudent(collectedInputs.name, collectedInputs.surname);
-    const createdExam = data.createExam(createdStudent, collectedInputs.chosenSubject, collectedInputs.grade);
-    ui.clearInputs();
-    if (createdExam.grade > 5) {
-        ui.displayPassed(data.store.passedList)
+    if(!data.isValidName(collectedInputs.name, collectedInputs.surname)){
+        ui.removeGradeValidation();        
+        ui.displayNameInputError();
+        
+    } else if(!data.isValidGrade(collectedInputs.grade)){
+        ui.removeNameValidation();        
+        ui.displayGradeError();
     } else {
-        ui.displayFailed(data.store.failedList)
+        ui.removeNameValidation();
+        ui.removeGradeValidation();
+        const createdStudent = data.createStudent(collectedInputs.name, collectedInputs.surname);
+        const createdExam = data.createExam(createdStudent, collectedInputs.chosenSubject, collectedInputs.grade);
+        ui.clearInputs();
+        if (createdExam.grade > 5) {
+            ui.displayPassed(data.store.passedList)
+        } else {
+            ui.displayFailed(data.store.failedList)
+        }
+        ui.displayPassedFailedCount(data.store.passedList.length, data.store.failedList.length, data.calculateFailedPercentage)
+        ui.displayStudentsCount(data.store.studentList.length)
     }
-    ui.displayPassedFailedCount(data.store.passedList.length, data.store.failedList.length, data.calculateFailedPercentage)
-    ui.displayStudentsCount(data.store.studentList.length)
 
 }
 
@@ -32,8 +43,6 @@ const removeItemHandler = (event) => {
             data.removeFromFailed(content);
             data.removeFromStudentList(content, allExams);
             ui.displayStudentsCount(data.store.studentList.length);
-            
-            
         }
     ui.displayPassedFailedCount(data.store.passedList.length, data.store.failedList.length, data.calculateFailedPercentage)        
     }
