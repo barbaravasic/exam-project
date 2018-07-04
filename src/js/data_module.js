@@ -33,10 +33,10 @@ export const store = {
 
 export const createStudent = (name, surname) => {
     const student = store.studentList.find(element => element.name === name && element.surname === surname)
-    if(student){
+    if (student) {
         return student;
     } else {
-        const createdStudent =  new Student(name, surname);
+        const createdStudent = new Student(name, surname);
         store.studentList.push(createdStudent);
         return createdStudent
     }
@@ -57,7 +57,7 @@ export const removeFromPassed = (content) => {
     const name = content.split(" ")[1];
     const surname = content.split(" ")[2];
     store.passedList = store.passedList.filter((element) => {
-        return !element.subject.includes(subject) && !element.student.name.includes(name) && !element.student.surname.includes(surname);
+        return !element.subject.includes(subject) && element.student.name !== name && element.student.surname !== surname;
     })
 }
 
@@ -66,8 +66,31 @@ export const removeFromFailed = (content) => {
     const name = content.split(" ")[1];
     const surname = content.split(" ")[2];
     store.failedList = store.failedList.filter((element) => {
-        return !element.subject.includes(subject) && !element.student.name.includes(name) && !element.student.surname.includes(surname);
+        return !element.subject.includes(subject) && element.student.name !== name && element.student.surname !== surname;
     })
+}
+
+export const removeFromStudentList = (content, allExams) => {
+    const name = content.split(" ")[1];
+    const surname = content.split(" ")[2];
+    console.log(store.studentList);
+    // const element = store.studentList.filter(el => {
+    //     return el.name === name && el.surname === surname;
+    // })[0]
+    
+    const studentRepetition = allExams.filter(el => {
+        return el.student.name === name && el.student.surname === surname
+    })
+    const index = store.studentList.indexOf(studentRepetition[0]);
+
+    if (studentRepetition.length > 1) {
+        return
+    } else {
+        store.studentList.splice(index, 1);
+    }
+
+    console.log(studentRepetition);
+
 }
 
 export const calculateFailedPercentage = (passedList, failedList) => {

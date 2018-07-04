@@ -45,7 +45,7 @@ export const displayPassed = (passedExamList) => {
     const $prevUl = $(DOMSelectors.ulPassed);
     const $passedListItems = passedExamList.map((exam, i) => {
         const spanLi = $("<span class='span-li'>").text(exam.getExamInfo())
-        const gradeDisplay = $("<span class='grade-span'>").text(exam.grade)
+        const gradeDisplay = $("<span class='grade-span'>").text(` ${exam.grade}`)
         const btnX = $(`<button class='btn-x' id='${i}passed'>`).text("X");
         const div = $("<div class='span-container'>").append(gradeDisplay).append(btnX)
         return $(`<li id='${i}passedLi'>`).append(spanLi).append(div)
@@ -59,7 +59,7 @@ export const displayFailed = (failedExamList) => {
     const $prevUl = $(DOMSelectors.ulFailed);    
     const $failedListItems = failedExamList.map((exam, i) => {
         const spanLi = $("<span class='span-li'>").text(exam.getExamInfo())
-        const gradeDisplay = $("<span class='grade-span'>").text(exam.grade)
+        const gradeDisplay = $("<span class='grade-span'>").text(` ${exam.grade}`)
         const btnX = $(`<button class='btn-x' id='${i}failed'>`).text("X");
         const div = $("<div class='span-container'>").append(gradeDisplay).append(btnX);
         return $(`<li id='${i}failedLi'>`).append(spanLi).append(div);
