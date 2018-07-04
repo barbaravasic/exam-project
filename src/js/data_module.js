@@ -32,7 +32,14 @@ export const store = {
 }
 
 export const createStudent = (name, surname) => {
-    const createdStudent = new Student(name, surname);
+    const student = store.studentList.find(element => element.name === name && element.surname === surname)
+    if(student){
+        return student;
+    } else {
+        const createdStudent =  new Student(name, surname);
+        store.studentList.push(createdStudent);
+        return createdStudent
+    }
 }
 
 export const createExam = (student, subject, grade) => {
