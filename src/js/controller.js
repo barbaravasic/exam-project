@@ -24,7 +24,6 @@ const addExamHandler = () => {
         ui.displayPassedFailedCount(data.store.passedList.length, data.store.failedList.length, data.calculateFailedPercentage)
         ui.displayStudentsCount(data.store.studentList.length)
     }
-
 }
 
 const removeItemHandler = (event) => {
