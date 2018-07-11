@@ -28,9 +28,13 @@ export const store = {
 }
 
 export const createStudent = (name, surname) => {
-    const student = store.studentList.find(element => element.name === name && element.surname === surname)
-    if (student) {
-        return student;
+    const student = store.studentList.filter(element => {
+        console.log(element.name, name);
+        return element.name.toLowerCase() === name && element.surname.toLowerCase() === surname
+    })
+    
+    if (student.length !== 0) {
+        return student[0];
     } else {
         const studentName = `${name[0].toUpperCase()}${name.slice(1)}`
         const studentSurname = `${surname[0].toUpperCase()}${surname.slice(1)}`

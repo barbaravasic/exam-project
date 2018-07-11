@@ -4,6 +4,7 @@ import * as data from './data_module.js';
 const addExamHandler = () => {
     const collectedInputs = ui.collectInputs();
     if(!data.isValidName(collectedInputs.name, collectedInputs.surname)){
+        
         ui.removeGradeValidation();        
         ui.displayNameInputError();
         
