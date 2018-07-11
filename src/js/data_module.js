@@ -29,7 +29,6 @@ export const store = {
 
 export const createStudent = (name, surname) => {
     const student = store.studentList.filter(element => {
-        console.log(element.name, name);
         return element.name.toLowerCase() === name && element.surname.toLowerCase() === surname
     })
     
@@ -91,8 +90,6 @@ export const removeFromStudentList = (content, allExams) => {
 export const calculateFailedPercentage = (passedList, failedList) => {
     const totalNumOfExams = passedList + failedList;
     const numOfFailed = failedList;
-    console.log(totalNumOfExams);
-    
     if(totalNumOfExams !== 0){
         return parseInt(100 * numOfFailed / totalNumOfExams);
     } else {
